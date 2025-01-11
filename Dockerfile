@@ -2,12 +2,11 @@ FROM alpine:3.21
 
 ENV TZ=Asia/Shanghai
 
-RUN apk add --no-cache tzdata nginx && \
+RUN apk add --no-cache tzdata nginx gettext curl && \
     rm -rf /var/cache/apk/* /tmp/*
 
 COPY --chmod=755 ./rootfs /
 
-EXPOSE 80
+RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["nginx"]
-CMD ["-g", "daemon off;"]
+ENTRYPOINT ["/entrypoint.sh"]

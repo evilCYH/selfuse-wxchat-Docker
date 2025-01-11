@@ -1,11 +1,12 @@
 server {
-    listen       9906;
-    listen  [::]:9906;
+    listen       ${PORT};
+    listen  [::]:${PORT};
 
     location / {
         root   /app/web;
         index  index.html index.htm;
     }
+
     location /cgi-bin/gettoken {
         proxy_pass https://qyapi.weixin.qq.com;
     }
@@ -15,5 +16,4 @@ server {
     location /cgi-bin/menu/create {
         proxy_pass https://qyapi.weixin.qq.com;
     }
-
 }
